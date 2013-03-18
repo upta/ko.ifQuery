@@ -43,4 +43,4 @@ You can also combine multiple rules together by comma-delimiting them.
 ```
 
 ## Caveats
-ko.ifQuery uses the [matchMedia(http://caniuse.com/#feat=matchmedia) function, which not all browsers support.  If you want to support these browsers, you'll need to use a polyfill such as [Modernizr](http://modernizr.com/). (note: I haven't tested this myself, your mileage may vary :)
+ko.ifQuery uses the [matchMedia](http://caniuse.com/#feat=matchmedia) function, which not all browsers support.  If you want to support these browsers, you'll need to use a polyfill such as [Modernizr](http://modernizr.com/). (note: I haven't tested this myself, your mileage may vary :)
