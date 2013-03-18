@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>ko.ifQuery Demo</title>
+        <style type="text/css">
+            #container div
+            {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            Current window width: <span data-bind="text: windowSize()"></span> (resize browser to change which elements are visible)
+            <br />
+            <br />
+
+            <!-- ko ifQuery: small -->
+            <div data-bind="template: { name: 'small' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: mediumdown -->
+            <div data-bind="template: { name: 'medium-down' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: medium -->
+            <div data-bind="template: { name: 'medium' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: mediumup -->
+            <div data-bind="template: { name: 'medium-up' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: largedown -->
+            <div data-bind="template: { name: 'large-down' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: large -->
+            <div data-bind="template: { name: 'large' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: largeup -->
+            <div data-bind="template: { name: 'large-up' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: xlarge -->
+            <div data-bind="template: { name: 'xlarge' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: portrait -->
+            <div data-bind="template: { name: 'portrait' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: landscape -->
+            <div data-bind="template: { name: 'landscape' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: custom -->
+            <div data-bind="template: { name: 'custom' }"></div>
+            <!--  /ko -->
+
+            <!-- ko ifQuery: smallandlandscape -->
+            <div data-bind="template: { name: 'small-and-landscape' }"></div>
+            <!--  /ko -->
+        </div>
+
+        <!--Using script templates keeps the browser from downloading the image until ko calls for it-->
+        <script type="text/html" id="small">
+            <img src="http://placehold.it/80x80&text=small" />
+        </script>
+
+        <script type="text/html" id="medium-down">
+            <img src="http://placehold.it/160x80&text=medium-down" />
+        </script>
+
+        <script type="text/html" id="medium">
+            <img src="http://placehold.it/80x80&text=medium" />
+        </script>
+
+        <script type="text/html" id="medium-up">
+            <img src="http://placehold.it/160x80&text=medium-up" />
+        </script>
+
+        <script type="text/html" id="large-down">
+            <img src="http://placehold.it/160x80&text=large-down" />
+        </script>
+
+        <script type="text/html" id="large">
+            <img src="http://placehold.it/80x80&text=large" />
+        </script>
+
+        <script type="text/html" id="large-up">
+            <img src="http://placehold.it/160x80&text=large-up" />
+        </script>
+
+        <script type="text/html" id="xlarge">
+            <img src="http://placehold.it/80x80&text=xlarge" />
+        </script>
+
+        <script type="text/html" id="portrait">
+            <img src="http://placehold.it/160x80&text=portrait" />
+        </script>
+
+        <script type="text/html" id="landscape">
+            <img src="http://placehold.it/160x80&text=landscape" />
+        </script>
+
+        <script type="text/html" id="custom">
+            <img src="http://placehold.it/300x80&text=custom (max 392px wide)" />
+        </script>
+
+        <script type="text/html" id="small-and-landscape">
+            <img src="http://placehold.it/300x80&text=small,landscape" />
+        </script>
+
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+        <script src="ko.ifQuery-1.0.0.js"></script>
+
+        <script type="text/javascript">
+            $( function ()
+            {
+                var vm =
+                {
+                    windowSize: ko.observable(),
+
+                    // only using observables for the sizes to be able to mutate them when we resize the browser for the demo
+                    // in the real world, you'll more likely bind to just the string literal
+                    small: ko.observable( "small" ),
+                    mediumdown: ko.observable( "medium-down" ),
+                    medium: ko.observable( "medium" ),
+                    mediumup: ko.observable( "medium-up" ),
+                    largedown: ko.observable( "large-down" ),
+                    large: ko.observable( "large" ),
+                    largeup: ko.observable( "large-up" ),
+                    xlarge: ko.observable( "xlarge" ),
+                    portrait: ko.observable( "portrait" ),
+                    landscape: ko.observable( "landscape" ),
+                    custom: ko.observable( "only screen and (max-width: 392px)" ),
+                    smallandlandscape: ko.observable( "small,landscape" )
+                };
+
+                ko.applyBindings( vm, $( ".container" )[0] );
+
+                $( window ).resize( function ( a )
+                {
+                    vm.small.valueHasMutated();
+                    vm.mediumdown.valueHasMutated();
+                    vm.medium.valueHasMutated();
+                    vm.mediumup.valueHasMutated();
+                    vm.largedown.valueHasMutated();
+                    vm.large.valueHasMutated();
+                    vm.largeup.valueHasMutated();
+                    vm.xlarge.valueHasMutated();
+                    vm.portrait.valueHasMutated();
+                    vm.landscape.valueHasMutated();
+                    vm.custom.valueHasMutated();
+                    vm.smallandlandscape.valueHasMutated();
+
+                    vm.windowSize( $( window ).width() );
+                } );
+
+                $( window ).resize();
+            } );
+        </script>
+    </body>
+</html>
